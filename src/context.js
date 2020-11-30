@@ -10,7 +10,10 @@ class ProductProvider extends Component {
     products: [],
     detailProduct: detailProduct,
     cart: [],
+    modalOpen: false,
+    modalProduct: detailProduct,
   };
+
   componentDidMount() {
     this.setProducts();
   }
@@ -58,6 +61,19 @@ class ProductProvider extends Component {
     );
   };
 
+  openModal = (id) => {
+    const product = this.getItem(id);
+    this.setState(() => {
+      return { modalProduct: product, modalOpen: true };
+    });
+  };
+
+  closeModal = () => {
+    this.setState(() => {
+      return { modalOpen: false };
+    });
+  };
+
   //testing to see if storeProducts matches what is in the state.products
   //With products: storeProducts in State we are experiencing a reference issue
   //because when we change state.products.inCart to true it also claims
@@ -88,6 +104,8 @@ class ProductProvider extends Component {
           ...this.state,
           handleDetail: this.handleDetail,
           addToCart: this.addToCart,
+          openModal: this.openModal,
+          closeModal: this.closeModal,
         }}
       >
         {this.props.children}
