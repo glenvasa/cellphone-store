@@ -9,9 +9,12 @@ class ProductProvider extends Component {
   state = {
     products: [],
     detailProduct: detailProduct,
-    cart: [],
+    cart: storeProducts,
     modalOpen: false,
     modalProduct: detailProduct,
+    cartSubTotal: 0,
+    cartTax: 0,
+    cartTotal: 0,
   };
 
   componentDidMount() {
@@ -74,6 +77,22 @@ class ProductProvider extends Component {
     });
   };
 
+  increment = (id) => {
+    console.log("this is increment method");
+  };
+
+  decrement = (id) => {
+    console.log("this is decrement method");
+  };
+
+  removeItem = (id) => {
+    console.log("this is removeItem method");
+  };
+
+  clearCart = () => {
+    console.log("this is clearCart method");
+  };
+
   //testing to see if storeProducts matches what is in the state.products
   //With products: storeProducts in State we are experiencing a reference issue
   //because when we change state.products.inCart to true it also claims
@@ -106,6 +125,10 @@ class ProductProvider extends Component {
           addToCart: this.addToCart,
           openModal: this.openModal,
           closeModal: this.closeModal,
+          increment: this.increment,
+          decrement: this.decrement,
+          removeItem: this.removeItem,
+          clearCart: this.clearCart,
         }}
       >
         {this.props.children}
